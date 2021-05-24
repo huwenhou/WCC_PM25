@@ -72,6 +72,13 @@ body {
 
 }
 
+th {
+    border: solid 1px #cccccc;
+    padding: 5px;
+    background-color:#1b6ec2;
+    color:#fff;
+}
+
 td {
     border: solid 1px #cccccc;
     padding:5px;
