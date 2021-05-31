@@ -450,7 +450,7 @@ namespace WCC_PM25
                 .FromSqlRaw(sqlCommand, loginAccountParam, procResultParam)
                 .ToList();
 
-            procResult = (int) procResultParam.Value;
+            procResult = (int)procResultParam.Value;
             return procResultData;
         }
 
@@ -927,15 +927,15 @@ namespace WCC_PM25
         public FakeDbSet()
         {
             _primaryKeys = null;
-            _data        = new ObservableCollection<TEntity>();
-            _query       = _data.AsQueryable();
+            _data = new ObservableCollection<TEntity>();
+            _query = _data.AsQueryable();
         }
 
         public FakeDbSet(params string[] primaryKeys)
         {
             _primaryKeys = typeof(TEntity).GetProperties().Where(x => primaryKeys.Contains(x.Name)).ToArray();
-            _data        = new ObservableCollection<TEntity>();
-            _query       = _data.AsQueryable();
+            _data = new ObservableCollection<TEntity>();
+            _query = _data.AsQueryable();
         }
 
         public override TEntity Find(params object[] keyValues)
@@ -1079,7 +1079,7 @@ namespace WCC_PM25
                 .MakeGenericMethod(expectedResultType)
                 .Invoke(this, new object[] { expression });
 
-            return (TResult) typeof(Task).GetMethod(nameof(Task.FromResult))
+            return (TResult)typeof(Task).GetMethod(nameof(Task.FromResult))
                 ?.MakeGenericMethod(expectedResultType)
                 .Invoke(null, new[] { executionResult });
         }
@@ -1164,7 +1164,7 @@ namespace WCC_PM25
             {
                 var resultType = m.Method.ReturnType; // it should be IQueryable<T>
                 var tElement = resultType.GetGenericArguments().First();
-                return (IQueryable) CreateInstance(tElement, expression);
+                return (IQueryable)CreateInstance(tElement, expression);
             }
 
             return CreateQuery<T>(expression);
@@ -1172,7 +1172,7 @@ namespace WCC_PM25
 
         public IQueryable<TEntity> CreateQuery<TEntity>(Expression expression)
         {
-            return (IQueryable<TEntity>) CreateInstance(typeof(TEntity), expression);
+            return (IQueryable<TEntity>)CreateInstance(typeof(TEntity), expression);
         }
 
         private object CreateInstance(Type tElement, Expression expression)
@@ -1213,7 +1213,7 @@ namespace WCC_PM25
         {
             var visitor = new FakeExpressionVisitor();
             var body = visitor.Visit(expression);
-            var f = Expression.Lambda<Func<TResult>>(body ?? throw new InvalidOperationException(string.Format("{0} is null", nameof(body))), (IEnumerable<ParameterExpression>) null);
+            var f = Expression.Lambda<Func<TResult>>(body ?? throw new InvalidOperationException(string.Format("{0} is null", nameof(body))), (IEnumerable<ParameterExpression>)null);
             return f.Compile()();
         }
     }
