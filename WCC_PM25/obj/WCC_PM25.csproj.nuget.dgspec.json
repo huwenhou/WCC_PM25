@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\robbie.hu\\Source\\Repos\\WCC_PM25\\WCC_PM25\\WCC_PM25.csproj": {}
+    "C:\\Users\\robbie.hu\\source\\repos\\WCC_PM25\\WCC_PM25\\WCC_PM25.csproj": {}
   },
   "projects": {
-    "C:\\Users\\robbie.hu\\Source\\Repos\\WCC_PM25\\WCC_PM25\\WCC_PM25.csproj": {
+    "C:\\Users\\robbie.hu\\source\\repos\\WCC_PM25\\WCC_PM25\\WCC_PM25.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\robbie.hu\\Source\\Repos\\WCC_PM25\\WCC_PM25\\WCC_PM25.csproj",
+        "projectUniqueName": "C:\\Users\\robbie.hu\\source\\repos\\WCC_PM25\\WCC_PM25\\WCC_PM25.csproj",
         "projectName": "WCC_PM25",
-        "projectPath": "C:\\Users\\robbie.hu\\Source\\Repos\\WCC_PM25\\WCC_PM25\\WCC_PM25.csproj",
+        "projectPath": "C:\\Users\\robbie.hu\\source\\repos\\WCC_PM25\\WCC_PM25\\WCC_PM25.csproj",
         "packagesPath": "C:\\Users\\robbie.hu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\robbie.hu\\Source\\Repos\\WCC_PM25\\WCC_PM25\\obj\\",
+        "outputPath": "C:\\Users\\robbie.hu\\source\\repos\\WCC_PM25\\WCC_PM25\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\robbie.hu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -43,6 +43,22 @@
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
               "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "Z.EntityFramework.Extensions.EFCore": {
+              "target": "Package",
+              "version": "[5.1.38, )"
             }
           },
           "imports": [
