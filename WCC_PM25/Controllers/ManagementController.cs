@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Z.EntityFramework.Extensions;
 
 namespace WCC_PM25.Controllers
 {
@@ -28,12 +24,45 @@ namespace WCC_PM25.Controllers
             }
         }
 
+        private void GetDataByPage()
+        {
+            ViewBag.Page = "P1";
+
+            if (!string.IsNullOrEmpty(Request.QueryString.Value))
+            {
+                ViewBag.Page = Request.QueryString.Value.Trim('?');
+            }
+
+            using var db = new MyDbContext();
+
+            int pagenumber = 10;
+            int pagecount = db.EDU365_EduSystemsUsers.Count();
+
+            int pages = 0;
+            if (pagecount%pagenumber == 0){
+                 pages = pagecount / pagenumber;
+            }
+            else{
+                 pages = pagecount / pagenumber + 1;
+            }
+
+            ViewBag.Pages = pages;
+
+            for (int i = 1; i <= pages; i++)
+            {
+                if (ViewBag.Page == "P"+i.ToString())
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagenumber*(i-1)).Take(pagenumber).ToList();
+                }
+            }
+        }
+
         public IActionResult Users()
         {
             ViewBag.Title = "Users";
 
-            using var db = new MyDbContext();
-            ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).ToList();
+            GetTableHeader();
+            GetDataByPage();
 
             return View();
         }
