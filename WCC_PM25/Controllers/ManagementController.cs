@@ -36,14 +36,56 @@ namespace WCC_PM25.Controllers
             }
         }
 
+
+
+        public void GetDataByPage()
+        {
+            ViewBag.Page = "P1";
+
+            if (!string.IsNullOrEmpty(Request.QueryString.Value))
+            {
+                ViewBag.Page = Request.QueryString.Value.Trim('?');
+            }
+
+            using var db = new MyDbContext();
+
+            int pagenumber = 10;
+            int pagecount = db.EDU365_EduSystemsUsers.Count();
+
+            int pages = 0;
+            if (pagecount % pagenumber == 0)
+            {
+                pages = pagecount / pagenumber;
+            }
+            else
+            {
+                pages = pagecount / pagenumber + 1;
+            }
+
+            ViewBag.Pages = pages;
+
+            //go to another page :
+            for (int i = 1; i <= pages; i++)
+            {
+                if (ViewBag.Page == "P" + i.ToString())
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagenumber * (i - 1)).Take(pagenumber).ToList();
+                }
+            }
+
+        }
+        
+
+
+
         public IActionResult Users()
         {
             ViewBag.Title = "Users";
-            GetTableHeader();
 
-            using var db = new MyDbContext();
-            ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).ToList();
-           
+            GetTableHeader();
+            GetDataByPage();
+             // ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).ToList();
+            //ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).OrderByDescending(x=>x.CreateTime).Select(x=>x.CreateTime).ToList();
 
             return View();
         }
