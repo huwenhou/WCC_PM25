@@ -1,0 +1,86 @@
+﻿
+<div style="        float: left;
+        background-color: #a6d6c9;
+        width: 100%;
+        height: 60px;
+        padding: 10px;
+">
+    <div style="        float: left;
+        padding:10px;padding-top:5px
+">
+        <i class="fa fa-bars fa-2x"></i>
+        <span style="font-size:25px;">PM2.5</span>
+    </div>
+    <div style="float:right;"><img src="~/images/logo.png" height="40" /></div>
+</div>
+<div style="        float: left;
+        width: 20%;
+        height: 700px;
+        padding: 10px;
+        border: solid 1px #cccccc;
+    ">
+    <div style="width:100%;">系统</div>
+    <div style="width: 100%; padding-left: 30px;"><a asp-controller="Management" asp-action="Users"><i class="fa fa-user"></i> 用户</a></div>
+
+    <div style="width:100%;">管理</div>
+    <div style="width: 100%; padding-left: 30px;"><a asp-controller="Management" asp-action="Region"><i class="fa fa-home"></i> 区域</a></div>
+    <div style="width: 100%; padding-left: 30px;"><a asp-controller="Management" asp-action="Sensor"><i class="fa fa-check-square"></i>传感器</a></div>
+    <div style="width: 100%; padding-left: 30px;"><a asp-controller="Management" asp-action="PM2_5"><i class="fa fa-cloud"></i>PM2.5</a></div>
+    <div style="width: 100%; padding-left: 30px;"><a asp-controller="Management" asp-action="Quality"><i class="fa fa-recycle"></i>空气质量标准表</a></div>
+    <div style="width: 100%; padding-left: 30px;"><i class="fa fa-leaf"></i>PM2.5标准表</div>
+</div>
+<div style="        float: left;
+        border: solid 1px #cccccc;
+        border-left: none;
+        height: 700px;
+        width: 80%
+    ">
+    <div style="        float: left;
+        width: 100%;
+        height: 50px;
+        padding: 10px;
+        border-bottom: solid 1px #cccccc;
+">
+        <div style="float:left;"><i class="fa fa-leaf"></i> PM2.5标准表</div>
+        <div style="float:right;">
+            <input type="text" style="width:200px;" />
+            <input type="button" value="Search" />
+        </div>
+
+    </div>
+    <div style="float: left;width: 100%; height: 500px; text-align:center;padding:10px;">
+        <table>
+            <tr>
+                <th>等级</th>
+                <th>PM2.5(min)</th>
+                <th>PM2.5(max)</th>
+                <th>空气质量</th>
+                <th>颜色</th>
+                <th>修改</th>
+
+
+            </tr>
+            <tr>
+                <td>@ViewBag.A1</td>
+                <td>@ViewBag.B1</td>
+                <td>@ViewBag.C1</td>
+                <td><i class="far far-bars"></td>
+                <td><i class="far far-bars"></td>
+                <td><i class="far far-bars"></td>
+
+
+            </tr>
+            <tr>
+
+                <td>@ViewData["A1"]</td>
+                <td>@ViewData["B2"]</td>
+                <td>@ViewData["C2"]</td>
+                <td><i class="far far-bars"></td>
+                <td><i class="far far-bars"></td>
+                <td><i class="far far-bars"></td>
+
+
+            </tr>
+        </table>
+    </div>
+</div>

@@ -8,10 +8,15 @@
     <Folder Include="Requirements\" />
     <Folder Include="wwwroot\Images\" />
     <Folder Include="Views\Common\" />
+    <Folder Include="Views\Management\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="5.1.38" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

@@ -1,21 +1,13 @@
 ﻿<Properties StartupConfiguration="{E1E21D7E-A3E3-4D39-B380-E74D40832801}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="WCC_PM25/Views/Common/Login.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WCC_PM25/Controllers/ManagementController.cs">
     <Files>
-      <File FileName="WCC_PM25/Views/Home/Index.cshtml" Line="9" Column="1" />
-      <File FileName="WCC_PM25/Views/Home/Default.cshtml" Line="8" Column="7" />
+      <File FileName="WCC_PM25/Views/Management/Users.cshtml" Line="64" Column="17" />
+      <File FileName="WCC_PM25/Controllers/ManagementController.cs" Line="46" Column="121" />
       <File FileName="WCC_PM25/Program.cs" Line="16" Column="1" />
-      <File FileName="WCC_PM25/Controllers/HomeController.cs" Line="29" Column="10" />
-      <File FileName="WCC_PM25/Views/Shared/_ValidationScriptsPartial.cshtml" />
-      <File FileName="WCC_PM25/Views/Shared/_Layout.cshtml" />
-      <File FileName="WCC_PM25/Controllers/CommonController.cs" Line="17" Column="1" />
-      <File FileName="WCC_PM25/wwwroot/css/site.css" Line="98" Column="1" />
-      <File FileName="WCC_PM25/Views/Common/Login.cshtml" Line="23" Column="8" />
-      <File FileName="WCC_PM25/Views/Home/Privacy.cshtml" Line="1" Column="1" />
-      <File FileName="WCC_PM25/Startup.cs" Line="57" Column="2" />
+      <File FileName="WCC_PM25/Models/DatabaseModel.cs" Line="5328" Column="21" />
       <File FileName="WCC_PM25/Models/ErrorViewModel.cs" Line="1" Column="1" />
-      <File FileName="WCC_PM25/Properties/launchSettings.json" Line="1" Column="1" />
-      <File FileName="WCC_PM25/Views/_ViewImports.cshtml" Line="1" Column="1" />
-      <File FileName="WCC_PM25/Views/_ViewStart.cshtml" Line="1" Column="1" />
+      <File FileName="WCC_PM25/WCC_PM25.csproj" Line="1" Column="1" />
+      <File FileName="WCC_PM25/appsettings.json" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -24,20 +16,16 @@
             <Node name="WCC_PM25" expanded="True">
               <Node name="Dependencies" expanded="True" />
               <Node name="Controllers" expanded="True">
-                <Node name="CommonController.cs" selected="True" />
+                <Node name="ManagementController.cs" selected="True" />
               </Node>
               <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Common" expanded="True" />
-                <Node name="Home" expanded="True" />
+                <Node name="Management" expanded="True" />
                 <Node name="Shared" expanded="True" />
               </Node>
               <Node name="wwwroot" expanded="True">
                 <Node name="css" expanded="True" />
-                <Node name="Images" expanded="True" />
-                <Node name="js" expanded="True" />
-                <Node name="lib" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -45,11 +33,13 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.WCC__PM25 PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.ItemProperties.WCC__PM25 PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/cyr/Desktop/WCC_PM25/WCC_PM25/Controllers/ManagementController.cs" relfile="WCC_PM25/Controllers/ManagementController.cs" line="22" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

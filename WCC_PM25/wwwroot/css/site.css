@@ -71,6 +71,23 @@ html {
 
 /*20200510*/
 body {
+}
+
+th {
+    border: solid 1px #cccccc;
+    padding: 5px;
+    background-color: #1b6ec2;
+    color: #fff;
+}
+
+td {
+    border: solid 1px #cccccc;
+    padding: 5px;
+}
+
+
+
+.homepage {
     background: no-repeat fixed center;
     background-size: 100%;
     background-image: url("/images/bg.jpg");
