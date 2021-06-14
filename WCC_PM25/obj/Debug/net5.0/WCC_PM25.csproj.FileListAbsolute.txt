@@ -9,7 +9,6 @@ C:\Users\robbie.hu\source\repos\WCC_PM25\WCC_PM25\bin\Debug\net5.0\ref\WCC_PM25.
 C:\Users\robbie.hu\source\repos\WCC_PM25\WCC_PM25\bin\Debug\net5.0\WCC_PM25.pdb
 C:\Users\robbie.hu\source\repos\WCC_PM25\WCC_PM25\bin\Debug\net5.0\WCC_PM25.Views.dll
 C:\Users\robbie.hu\source\repos\WCC_PM25\WCC_PM25\bin\Debug\net5.0\WCC_PM25.Views.pdb
-C:\Users\robbie.hu\source\repos\WCC_PM25\WCC_PM25\obj\Debug\net5.0\WCC_PM25.csprojAssemblyReference.cache
 C:\Users\robbie.hu\source\repos\WCC_PM25\WCC_PM25\obj\Debug\net5.0\WCC_PM25.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\robbie.hu\source\repos\WCC_PM25\WCC_PM25\obj\Debug\net5.0\WCC_PM25.AssemblyInfoInputs.cache
 C:\Users\robbie.hu\source\repos\WCC_PM25\WCC_PM25\obj\Debug\net5.0\WCC_PM25.AssemblyInfo.cs
