@@ -50,7 +50,7 @@ namespace WCC_PM25
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Common}/{action=Login}");
+                    pattern: "{controller=Management}/{action=Users}");
             });
         }
     }
