@@ -392,3 +392,5 @@
 /Users/cyr/Desktop/WCC_PM25/WCC_PM25/obj/Debug/net5.0/Razor/Views/Management/PM2_5.cshtml.g.cs
 /Users/cyr/Desktop/WCC_PM25/WCC_PM25/obj/Debug/net5.0/Razor/Views/Management/Quality.cshtml.g.cs
 /Users/cyr/Desktop/WCC_PM25/WCC_PM25/obj/Debug/net5.0/Razor/Views/Management/PM_standard.cshtml.g.cs
+/Users/cyr/Desktop/WCC_PM25/WCC_PM25/bin/Debug/net5.0/PagedList.dll
+/Users/cyr/Desktop/WCC_PM25/WCC_PM25/bin/Debug/net5.0/PagedList.Mvc.dll

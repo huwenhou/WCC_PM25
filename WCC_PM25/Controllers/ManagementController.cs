@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Z.EntityFramework.Extensions;
 
+
 namespace WCC_PM25.Controllers
 {
     public class ManagementController : Controller
@@ -42,52 +43,127 @@ namespace WCC_PM25.Controllers
         {
             ViewBag.Page = "P1";
 
+            // Query String是通过网址传的参数 
             if (!string.IsNullOrEmpty(Request.QueryString.Value))
+
             {
+                //把问号去掉
                 ViewBag.Page = Request.QueryString.Value.Trim('?');
             }
 
             using var db = new MyDbContext();
 
-            int pagenumber = 10;
-            int pagecount = db.EDU365_EduSystemsUsers.Count();
+            int pagenumber = 10;//默认每一页多少行 只在算skip和一共多少页才用
+            int pagecount = 10; // 默认显示页码的数量 eg 1-10，11-21.。。
 
-            int pages = 0;
-            if (pagecount % pagenumber == 0)
+            int pages = 0;// 总页码数量
+
+
+            int recordcount = db.EDU365_EduSystemsUsers.Count();//一共多少个用户数据
+
+            //找出总行数
+            if (recordcount % pagenumber == 0) //如果用户数据能除净每页的行数
             {
-                pages = pagecount / pagenumber;
+                pages = recordcount / pagenumber; //每页的行数都一样
             }
             else
             {
-                pages = pagecount / pagenumber + 1;
+                pages = recordcount / pagenumber + 1; //余出来的数据放到多出来的一页里 
             }
 
-            ViewBag.Pages = pages;
 
-            //go to another page :
-            for (int i = 1; i <= pages; i++)
+
+            ViewBag.PageCount = pagecount;//默认显示页码的数量
+
+            ViewBag.PageNumbers = pagecount;// 实际显示页码数，eg. 余3页的情况
+
+
+
+
+            //显示每一页的用户数据
+            if (ViewBag.Page.IndexOf("P") == 0)
             {
-                if (ViewBag.Page == "P" + i.ToString())
+                //确认选中页码
+                int pageindex = int.Parse(ViewBag.Page.Replace("P", "")) - 1;   //int.Parse convert a string representation value into it's integer equivalent 
+
+                //确认当前页码的组号
+                ViewBag.PageGroup = pageindex / pagecount;
+
+                //如果最后一组*默认每组页码数量大于总页码数量
+                if ((ViewBag.PageGroup + 1) * pagecount > pages)
                 {
-                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagenumber * (i - 1)).Take(pagenumber).ToList();
+                    ViewBag.PageNumbers = pages % pagecount; //最有一组的显示页数为余数
                 }
+
+                //显示用户数据
+                ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+
+
+
+
             }
+
+            //翻到上/下一个页面
+            else
+            {
+
+                //先确认当前是哪个组
+                int pagegroup = int.Parse(ViewBag.Page.Substring(1));
+
+                //下一页
+                if (ViewBag.Page.IndexOf("N") == 0)
+                {
+                    //检查range
+                    if ((pagegroup + 1) * pagecount < pages)
+                    {
+                        pagegroup++;
+                    }
+
+                    if ((pagegroup + 1) * pagecount > pages)
+                    {
+                        ViewBag.PageNumbers = pages % pagecount;
+                    }
+
+                }
+
+                //上一页
+                if (ViewBag.Page.IndexOf("V") == 0)
+                {
+                    if (pagegroup > 0)
+                    {
+                        pagegroup--;
+                    }
+
+                    //如果总页数小于10
+                    if (pagecount > pages)
+                    {
+                        ViewBag.PageNumber = pages % pagecount;
+                    }
+                }
+
+                ViewBag.PageGroup = pagegroup;
+                ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
+
+
+            }
+
+
+
 
         }
-        
-
-
 
         public IActionResult Users()
         {
             ViewBag.Title = "Users";
 
-            GetTableHeader();
-            GetDataByPage();
-             // ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).ToList();
-            //ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).OrderByDescending(x=>x.CreateTime).Select(x=>x.CreateTime).ToList();
+                GetTableHeader();
 
-            return View();
+                GetDataByPage();
+
+                return View();
+                // GetDataByPage();
+                // ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).ToList();
+                //ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).OrderByDescending(x=>x.CreateTime).Select(x=>x.CreateTime).ToList();
         }
 
         public IActionResult Region()

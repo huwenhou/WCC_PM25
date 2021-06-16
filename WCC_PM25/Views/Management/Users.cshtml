@@ -3,7 +3,7 @@
         background-color: #a6d6c9;
         width: 100%;
         height: 60px;
-        padding: 10px;">
+        padding: 10px;">
     <div style="        float: left;
         padding:10px;padding-top:5px
 ">
@@ -60,44 +60,42 @@
 
             @foreach (var user in ViewBag.Users)
             {
-                <tr>
-                    <td>@user.UserNameEn</td>
-                    <td>@user.UserEmail</td>
-                    <td>@user.CreateTime</td>
-                    <td><i class="fa fa-bars"></td>
-                    <td><i class="fa fa-desktop"></td>
-                </tr>
+            <tr>
+                <td>@user.UserNameEn</td>
+                <td>@user.UserEmail</td>
+                <td>@user.CreateTime</td>
+                <td><i class="fa fa-bars"></td>
+                <td><i class="fa fa-desktop"></td>
+            </tr>
             }
 
 
             @*<tr>
-            <td>@ViewBag.A1</td>
-            <td>@ViewBag.B1</td>
-            <td>@ViewBag.C1</td>
-            <td><i class="far far-bars"></td>
-            <td><i class="far far-desktop "></td>
-        </tr>
-        <tr>
-            <td>@ViewData["A1"]</td>
-            <td>@ViewData["B2"]</td>
-            <td>@ViewData["C2"]</td>
-            <td><i class="far far-bars"></td>
-            <td><i class="far far-desktop "></td>
-
-        </tr>*@
+                    <td>@ViewBag.A1</td>
+                    <td>@ViewBag.B1</td>
+                    <td>@ViewBag.C1</td>
+                    <td><i class="far far-bars"></td>
+                    <td><i class="far far-desktop "></td>
+                </tr>
+                <tr>
+                    <td>@ViewData["A1"]</td>
+                    <td>@ViewData["B2"]</td>
+                    <td>@ViewData["C2"]</td>
+                    <td><i class="far far-bars"></td>
+                    <td><i class="far far-desktop "></td>
+                </tr>*@
         </table>
         <table>
             <tr>
-                <td><</td>
-
-
-
-                @for (int i = 0; i < ViewBag.Pages; i++)
+                <td style="width:30px"><a href="/Management/Users?V@(ViewBag.PageGroup)"><div style="background-color:black;color:white">&lt;&lt;</div></a></td>
+                @for (int i = 0; i < ViewBag.PageNumbers; i++)
                 {
-                    <td style="width:30px"><a href="/Management/Users?P@(i+1)"><div style="background-color:while;color:black">@(i+1)</div></a></td>
+                    <td style="width:30px"><a href="/Management/Users?P@(i+1+ViewBag.PageGroup*ViewBag.PageCount)"><div style="background-color:black;color:white">@(i+1 + ViewBag.PageGroup * ViewBag.PageCount)</div></a> </td>
+
                 }
 
-                <td><</td>
+                <td style="width:30px"><a href="/Management/Users?N@(ViewBag.PageGroup)"><div style="background-color:black;color:white">&gt;&gt;</div></a></td>
+
             </tr>
 
         </table>    
@@ -105,4 +103,3 @@
 
     </div>
 </div>
-
