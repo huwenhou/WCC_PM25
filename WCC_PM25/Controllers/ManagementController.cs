@@ -56,6 +56,7 @@ namespace WCC_PM25.Controllers
             int pagenumber = 10;//默认每一页多少行 只在算skip和一共多少页才用
             int pagecount = 10; // 默认显示页码的数量 eg 1-10，11-21.。。
 
+
             int pages = 0;// 总页码数量
 
 
@@ -88,6 +89,8 @@ namespace WCC_PM25.Controllers
 
                 //确认当前页码的组号
                 ViewBag.PageGroup = pageindex / pagecount;
+                
+               
 
                 //如果最后一组*默认每组页码数量大于总页码数量
                 if ((ViewBag.PageGroup + 1) * pagecount > pages)
@@ -107,12 +110,13 @@ namespace WCC_PM25.Controllers
             else
             {
 
-                //先确认当前是哪个组
-                int pagegroup = int.Parse(ViewBag.Page.Substring(1));
+
 
                 //下一页
                 if (ViewBag.Page.IndexOf("N") == 0)
                 {
+                    //先确认当前是哪个组
+                    int pagegroup = int.Parse(ViewBag.Page.Substring(1));
                     //检查range
                     if ((pagegroup + 1) * pagecount < pages)
                     {
@@ -123,12 +127,17 @@ namespace WCC_PM25.Controllers
                     {
                         ViewBag.PageNumbers = pages % pagecount;
                     }
+                    ViewBag.PageGroup = pagegroup;
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
+
 
                 }
 
                 //上一页
                 if (ViewBag.Page.IndexOf("V") == 0)
                 {
+                    //先确认当前是哪个组
+                    int pagegroup = int.Parse(ViewBag.Page.Substring(1));
                     if (pagegroup > 0)
                     {
                         pagegroup--;
@@ -139,31 +148,46 @@ namespace WCC_PM25.Controllers
                     {
                         ViewBag.PageNumber = pages % pagecount;
                     }
+
+                    ViewBag.PageGroup = pagegroup;
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
+
+
+                }
+                if (ViewBag.Page.IndexOf("n") == 0)
+                {
+
+                    ViewBag.PageCount = 1; 
+                    int pagegroup = int.Parse(ViewBag.Page.Substring(1));
+                    //检查range
+                    if (pagegroup+2 < pages-pages % pagecount)
+                    {
+                        pagegroup++;
+                    }
+
+                    if (pagegroup+2 > pages - pages % pagecount-1)
+                    {
+                        ViewBag.PageNumbers = (pages+2) % pagecount;
+                    }
+                    ViewBag.PageGroup = pagegroup;
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagenumber).Take(pagenumber).ToList();
                 }
 
-                ViewBag.PageGroup = pagegroup;
-                ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
-
-
             }
-
-
-
-
         }
 
         public IActionResult Users()
         {
             ViewBag.Title = "Users";
 
-                GetTableHeader();
+            GetTableHeader();
 
-                GetDataByPage();
+            GetDataByPage();
 
-                return View();
-                // GetDataByPage();
-                // ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).ToList();
-                //ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).OrderByDescending(x=>x.CreateTime).Select(x=>x.CreateTime).ToList();
+            return View();
+            // GetDataByPage();
+            // ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).ToList();
+            //ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).OrderByDescending(x=>x.CreateTime).Select(x=>x.CreateTime).ToList();
         }
 
         public IActionResult Region()
@@ -193,3 +217,4 @@ namespace WCC_PM25.Controllers
         }
     }
 }
+    
