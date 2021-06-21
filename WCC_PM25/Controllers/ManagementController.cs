@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
+using WCC_PM25.Models;
 
 namespace WCC_PM25.Controllers
 {
@@ -25,8 +27,10 @@ namespace WCC_PM25.Controllers
         }
 
         //Method 1
-        private void GetDataByPage()
+        private void GetDataByPage(UserViewModel data)
         {
+            var vm = new UserViewModel();
+
             ViewBag.Page = "P1";
 
             if (!string.IsNullOrEmpty(Request.QueryString.Value))
@@ -75,7 +79,24 @@ namespace WCC_PM25.Controllers
                 }
 
                 //显示用户数据
-                ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+                if(!string.IsNullOrEmpty(data.Keyword))
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.Keyword) || x.UserEmail.Contains(data.Keyword)).OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+                }
+                else if (!string.IsNullOrEmpty(data.UserName))
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.UserName)).OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+                }
+                else if (!string.IsNullOrEmpty(data.Email))
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserEmail.Contains(data.Email)).OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+                }
+                else
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+                }
+
+
             }
             else
             {
@@ -109,19 +130,33 @@ namespace WCC_PM25.Controllers
 
                 //当前页码组的编号
                 ViewBag.PageGroup = pagegroup;
-                ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
 
+                if (!string.IsNullOrEmpty(data.Keyword))
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.Keyword) || x.UserEmail.Contains(data.Keyword)).OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
+                }
+                else if (!string.IsNullOrEmpty(data.UserName))
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.UserName)).OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
+                }
+                else if (!string.IsNullOrEmpty(data.Email))
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserEmail.Contains(data.Email) ).OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
+                }
+                else
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
+                }
             }
         }
 
-        public IActionResult Users()
+        public IActionResult Users(UserViewModel data)
         {
             ViewBag.Title = "Users";
 
             GetTableHeader();
-
-            GetDataByPage();
-
+            GetDataByPage(data);
+            
             return View();
         }
 
