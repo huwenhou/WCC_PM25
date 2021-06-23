@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Z.EntityFramework.Extensions;
-using WCC_PM25.Models; 
+using WCC_PM25.Models;
 
 
 namespace WCC_PM25.Controllers
@@ -81,7 +82,7 @@ namespace WCC_PM25.Controllers
 
             ViewBag.PageNumbers = pagecount;// 实际显示页码数，eg. 余3页的情况
 
-
+            Console.WriteLine("pagenumber", pages);
 
 
             //显示每一页的用户数据
@@ -92,6 +93,7 @@ namespace WCC_PM25.Controllers
 
                 //确认当前页码的组号
                 ViewBag.PageGroup = pageindex / pagecount;
+                
 
 
                 if ((ViewBag.PageGroup + 1) * pagecount > pages)
@@ -135,7 +137,7 @@ namespace WCC_PM25.Controllers
                 //下一页
                 if (ViewBag.Page.IndexOf("N") == 0)
                 {
-                    
+
                     //检查range
                     if ((pagegroup + 1) * pagecount < pages)
                     {
@@ -152,7 +154,7 @@ namespace WCC_PM25.Controllers
                 //上一页
                 else
                 {
-                    
+
                     if (pagegroup > 0)
                     {
                         pagegroup--;
@@ -164,13 +166,13 @@ namespace WCC_PM25.Controllers
                         ViewBag.PageNumber = pages % pagecount;
                     }
 
-                   
+
 
                 }
 
                 //单放页：改变pagecount为1 
                 //if (ViewBag.Page.IndexOf("n") == 0) { 
-                  
+
 
                 //        ViewBag.PageCount = 1;
                 //        int pagegroup = int.Parse(ViewBag.Page.Substring(1));
@@ -184,7 +186,7 @@ namespace WCC_PM25.Controllers
                 //        {
                 //            ViewBag.PageNumbers = (pages + 2) % pagecount;
                 //        }
-                   
+
                 //}
                 //else
                 //    {
@@ -201,7 +203,7 @@ namespace WCC_PM25.Controllers
                 //        {
                 //            ViewBag.PageNumber = pages % pagecount;
                 //        }
-                   
+
                 //}
 
                 ViewBag.PageGroup = pagegroup;
@@ -235,13 +237,13 @@ namespace WCC_PM25.Controllers
 
             GetDataByPage(data);
 
-           
+
 
             return View();
-            
+
         }
 
-      
+
         public IActionResult Region()
         {
             ViewBag.Title = "Region";
@@ -269,4 +271,3 @@ namespace WCC_PM25.Controllers
         }
     }
 }
-
