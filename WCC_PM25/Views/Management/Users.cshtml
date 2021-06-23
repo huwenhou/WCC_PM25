@@ -1,4 +1,5 @@
 ﻿
+@model UserViewModel
 <div style="        float: left;
         background-color: #a6d6c9;
         width: 100%;
@@ -41,15 +42,16 @@
         padding: 10px;
         border-bottom: solid 1px #cccccc;
 ">
-        <div style="float:left;"><i class="fa fa-user"></i> 用户</div>
+        <div style="float:left;"><i class="fa fa-user"></i> 用户 </div>
         <div style="float:right;">
-            <input type="text" style="width:200px;" />
-            <input type="button" value="Search" />
+            User Name: <input type="text" style="width:100px;" asp-for="@Model.UserName" />
+            Email:  <input type="text" style="width:100px;" asp-for="@Model.Email" />
+            Keyword:  <input type="text" style="width:100px;" asp-for="@Model.Keyword" />
+            <input type="submit" value="Search" />
         </div>
-
     </div>
     <div style="float: left;width: 100%; height: 500px; text-align:center;padding:10px;">
-        <table>
+        <table style="width:100%";>
             <tr>
                 <th>@ViewBag.UserNameHead</th>
                 <th>@ViewBag.EmailNameHead</th>
@@ -60,13 +62,13 @@
 
             @foreach (var user in ViewBag.Users)
             {
-            <tr>
-                <td>@user.UserNameEn</td>
-                <td>@user.UserEmail</td>
-                <td>@user.CreateTime</td>
-                <td><i class="fa fa-bars"></td>
-                <td><i class="fa fa-desktop"></td>
-            </tr>
+                <tr >
+                    <td>@user.UserNameEn</td>
+                    <td>@user.UserEmail</td>
+                    <td>@user.CreateTime</td>
+                    <td><i class="fa fa-bars"></td>
+                    <td><i class="fa fa-desktop"></td>
+                </tr>
             }
 
 
@@ -92,12 +94,10 @@
                 {
                     <td style="width:30px"><a href="/Management/Users?P@(i+1+ViewBag.PageGroup*ViewBag.PageCount)"><div style="background-color:black;color:white">@(i+1 + ViewBag.PageGroup * ViewBag.PageCount)</div></a></td>
                 }
-
-                <td style="width:30px"><a href="/Management/Users?n@(ViewBag.PageGroup)"><div style="background-color:black;color:white">&gt;</div></a></td>
                 <td style="width:30px"><a href="/Management/Users?N@(ViewBag.PageGroup)"><div style="background-color:black;color:white">&gt;&gt;</div></a></td>
             </tr>
 
-        </table>    
+        </table>
 
 
     </div>

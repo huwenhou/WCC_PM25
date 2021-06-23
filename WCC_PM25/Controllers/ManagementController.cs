@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Z.EntityFramework.Extensions;
+using WCC_PM25.Models; 
 
 
 namespace WCC_PM25.Controllers
@@ -39,8 +40,10 @@ namespace WCC_PM25.Controllers
 
 
 
-        public void GetDataByPage()
+        private void GetDataByPage(UserViewModel data)
         {
+            var vm = new UserViewModel();
+
             ViewBag.Page = "P1";
 
             // Query String是通过网址传的参数 
@@ -89,17 +92,33 @@ namespace WCC_PM25.Controllers
 
                 //确认当前页码的组号
                 ViewBag.PageGroup = pageindex / pagecount;
-                
-               
 
-                //如果最后一组*默认每组页码数量大于总页码数量
+
                 if ((ViewBag.PageGroup + 1) * pagecount > pages)
                 {
-                    ViewBag.PageNumbers = pages % pagecount; //最有一组的显示页数为余数
+                    ViewBag.PageNumbers = pages % pagecount;
                 }
 
-                //显示用户数据
-                ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+                //如果最后一组*默认每组页码数量大于总页码数量
+
+                if (!string.IsNullOrEmpty(data.Keyword))//search by keyword
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.Keyword) || x.UserEmail.Contains(data.Keyword)).OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+
+                }
+                else if (!string.IsNullOrEmpty(data.UserName))//Search by username
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.UserName)).OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+
+                }
+                else if (!string.IsNullOrEmpty(data.Email)) // Search by email 
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserEmail.Contains(data.Email)).OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+                }
+                else
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+                }
 
 
 
@@ -109,14 +128,14 @@ namespace WCC_PM25.Controllers
             //翻到上/下一个页面
             else
             {
-
+                //先确认当前是哪个组
+                int pagegroup = int.Parse(ViewBag.Page.Substring(1));
 
 
                 //下一页
                 if (ViewBag.Page.IndexOf("N") == 0)
                 {
-                    //先确认当前是哪个组
-                    int pagegroup = int.Parse(ViewBag.Page.Substring(1));
+                    
                     //检查range
                     if ((pagegroup + 1) * pagecount < pages)
                     {
@@ -127,17 +146,13 @@ namespace WCC_PM25.Controllers
                     {
                         ViewBag.PageNumbers = pages % pagecount;
                     }
-                    ViewBag.PageGroup = pagegroup;
-                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
-
 
                 }
 
                 //上一页
-                if (ViewBag.Page.IndexOf("V") == 0)
+                else
                 {
-                    //先确认当前是哪个组
-                    int pagegroup = int.Parse(ViewBag.Page.Substring(1));
+                    
                     if (pagegroup > 0)
                     {
                         pagegroup--;
@@ -149,47 +164,84 @@ namespace WCC_PM25.Controllers
                         ViewBag.PageNumber = pages % pagecount;
                     }
 
-                    ViewBag.PageGroup = pagegroup;
-                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
-
+                   
 
                 }
-                if (ViewBag.Page.IndexOf("n") == 0)
+
+                //单放页：改变pagecount为1 
+                //if (ViewBag.Page.IndexOf("n") == 0) { 
+                  
+
+                //        ViewBag.PageCount = 1;
+                //        int pagegroup = int.Parse(ViewBag.Page.Substring(1));
+                //        //检查range
+                //        if (pagegroup + 2 < pages - pages % pagecount)
+                //        {
+                //            pagegroup++;
+                //        }
+
+                //        if (pagegroup + 2 > pages - pages % pagecount - 1)
+                //        {
+                //            ViewBag.PageNumbers = (pages + 2) % pagecount;
+                //        }
+                   
+                //}
+                //else
+                //    {
+
+                //        ViewBag.PageCount = 1;
+                //        int pagegroup = int.Parse(ViewBag.Page.Substring(1));
+                //        //检查range
+                //        if (pagegroup > 0)
+                //        {
+                //            pagegroup--;
+                //        }
+
+                //        if (10 > pages)
+                //        {
+                //            ViewBag.PageNumber = pages % pagecount;
+                //        }
+                   
+                //}
+
+                ViewBag.PageGroup = pagegroup;
+                if (!string.IsNullOrEmpty(data.Keyword))
                 {
-
-                    ViewBag.PageCount = 1; 
-                    int pagegroup = int.Parse(ViewBag.Page.Substring(1));
-                    //检查range
-                    if (pagegroup+2 < pages-pages % pagecount)
-                    {
-                        pagegroup++;
-                    }
-
-                    if (pagegroup+2 > pages - pages % pagecount-1)
-                    {
-                        ViewBag.PageNumbers = (pages+2) % pagecount;
-                    }
-                    ViewBag.PageGroup = pagegroup;
-                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagenumber).Take(pagenumber).ToList();
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.Keyword) || x.UserEmail.Contains(data.Keyword)).OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
+                }
+                else if (!string.IsNullOrEmpty(data.UserName))
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.UserName)).OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
+                }
+                else if (!string.IsNullOrEmpty(data.Email))
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserEmail.Contains(data.Email)).OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
+                }
+                else
+                {
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pagegroup * pagecount * pagenumber).Take(pagenumber).ToList();
                 }
 
             }
+
+
         }
 
-        public IActionResult Users()
+        public IActionResult Users(UserViewModel data)
         {
             ViewBag.Title = "Users";
 
             GetTableHeader();
 
-            GetDataByPage();
+            GetDataByPage(data);
+
+           
 
             return View();
-            // GetDataByPage();
-            // ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).ToList();
-            //ViewBag.Users = db.EDU365_EduSystemsUsers.Take(10).OrderByDescending(x=>x.CreateTime).Select(x=>x.CreateTime).ToList();
+            
         }
 
+      
         public IActionResult Region()
         {
             ViewBag.Title = "Region";
@@ -217,4 +269,4 @@ namespace WCC_PM25.Controllers
         }
     }
 }
-    
+

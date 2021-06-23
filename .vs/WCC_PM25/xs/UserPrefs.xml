@@ -1,8 +1,29 @@
 ﻿<Properties StartupConfiguration="{E1E21D7E-A3E3-4D39-B380-E74D40832801}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="WCC_PM25/Views/Management/Users.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WCC_PM25/Models/UserViewModel.cs">
     <Files>
-      <File FileName="WCC_PM25/Controllers/ManagementController.cs" Line="80" Column="12" />
+      <File FileName="WCC_PM25/Views/Management/Quality.cshtml" Line="1" Column="1" />
+      <File FileName="WCC_PM25/Views/Management/Users.cshtml" Line="1" Column="1" />
+      <File FileName="WCC_PM25/Controllers/ManagementController.cs" Line="1" Column="1" />
+      <File FileName="WCC_PM25/Models/UserViewModel.cs" Line="1" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="WCC_PM25" expanded="True">
+            <Node name="WCC_PM25" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="UserViewModel.cs" selected="True" />
+              </Node>
+              <Node name="Views" expanded="True">
+                <Node name="Common" expanded="True" />
+                <Node name="Management" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.WCC__PM25 PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
