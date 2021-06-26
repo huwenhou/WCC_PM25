@@ -43,7 +43,7 @@ namespace WCC_PM25.Controllers
 
         private void GetDataByPage(UserViewModel data)
         {
-            var vm = new UserViewModel();
+            //var vm = new UserViewModel();
 
             ViewBag.Page = "P1";
 
@@ -82,18 +82,18 @@ namespace WCC_PM25.Controllers
 
             ViewBag.PageNumbers = pagecount;// 实际显示页码数，eg. 余3页的情况
 
-            Console.WriteLine("pagenumber", pages);
 
 
             //显示每一页的用户数据
             if (ViewBag.Page.IndexOf("P") == 0)
             {
+
                 //确认选中页码
-                int pageindex = int.Parse(ViewBag.Page.Replace("P", "")) - 1;   //int.Parse convert a string representation value into it's integer equivalent 
+                int pageindex = int.Parse(ViewBag.Page.Replace("P", "")) - 1;   //int.Parse convert a string representation value into it's integer equivalent
 
                 //确认当前页码的组号
                 ViewBag.PageGroup = pageindex / pagecount;
-                
+            
 
 
                 if ((ViewBag.PageGroup + 1) * pagecount > pages)
@@ -101,27 +101,146 @@ namespace WCC_PM25.Controllers
                     ViewBag.PageNumbers = pages % pagecount;
                 }
 
+                int recordcount2 = 0;
+
+
+
                 //如果最后一组*默认每组页码数量大于总页码数量
 
-                if (!string.IsNullOrEmpty(data.Keyword))//search by keyword
+               if (!string.IsNullOrEmpty(data.Keyword))//search by keyword
                 {
-                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.Keyword) || x.UserEmail.Contains(data.Keyword)).OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+                       
+                     recordcount2 = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.Keyword) || x.UserEmail.Contains(data.Keyword)).Count(); //找出搜索页面一共有多
 
+                     int pages2 =0;
+                   
+                    //  Console.WriteLine(recordcount);
+                    
+                    if (recordcount2 % pagenumber == 0) //如果用户数据能除净每页的行数
+                    {
+                        pages2 = recordcount2 / pagenumber; //每页的行数都一样
+                    }
+                    else
+                    {
+                         pages2= recordcount2 / pagenumber + 1; //余出来的数据放到多出来的一页里 
+                    }
+                    //Console.WriteLine(pages);
+
+                    //确认选中页码
+                   int pageindex2 = int.Parse(ViewBag.Page.Replace("P", "")) - 1;   //int.Parse convert a string representation value into it's integer equivalent
+                    Console.WriteLine(pageindex);
+
+                    //确认当前页码的组号
+                    ViewBag.PageGroup = pageindex2 / pagecount;
+                  
+                
+
+                    ViewBag.PageCount = pagecount;//默认显示页码的数量
+
+                    ViewBag.PageNumbers = pagecount;// 实际显示页码数，eg. 余3页的情况
+
+                   
+         
+
+                    if ((ViewBag.PageGroup + 1) * pagecount >  pages2)
+                    {
+                        ViewBag.PageNumbers = pages2 % pagecount;
+                    }
+
+
+
+
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.Keyword) || x.UserEmail.Contains(data.Keyword)).OrderByDescending(x => x.CreateTime).Skip(pageindex2 * pagenumber).Take(pagenumber).ToList();
+                  
                 }
+
+
+
                 else if (!string.IsNullOrEmpty(data.UserName))//Search by username
                 {
-                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.UserName)).OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
 
+                    recordcount = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.UserName)).Count(); //找出搜索页面一共有多少行
+                   Console.WriteLine(recordcount);
+                    
+                    if (recordcount % pagenumber == 0) //如果用户数据能除净每页的行数
+                    {
+                        pages = recordcount / pagenumber; //每页的行数都一样
+                    }
+                    else
+                    {
+                        pages = recordcount / pagenumber + 1; //余出来的数据放到多出来的一页里 
+                    }
+                    Console.WriteLine(pages);
+
+
+                    ViewBag.PageCount = pagecount;//默认显示页码的数量
+
+                    ViewBag.PageNumbers = pagecount;// 实际显示页码数，eg. 余3页的情况
+
+                    //确认选中页码
+                    pageindex = int.Parse(ViewBag.Page.Replace("P", "")) - 1;   //int.Parse convert a string representation value into it's integer equivalent
+                   
+
+                    //确认当前页码的组号
+                    ViewBag.PageGroup = pageindex / pagecount;
+
+         
+
+                    if ((ViewBag.PageGroup + 1) * pagecount > pages)
+                    {
+                        ViewBag.PageNumbers = pages % pagecount;
+                    }
+
+                   
+                    ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserNameEn.Contains(data.UserName)).OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+                   
                 }
                 else if (!string.IsNullOrEmpty(data.Email)) // Search by email 
                 {
+                       recordcount = db.EDU365_EduSystemsUsers.Where(x => x.UserEmail.Contains(data.Email)).Count(); //找出搜索页面一共有多少行
+                  //  Console.WriteLine(recordcount);
+                    
+                    if (recordcount % pagenumber == 0) //如果用户数据能除净每页的行数
+                    {
+                        pages = recordcount / pagenumber; //每页的行数都一样
+                    }
+                    else
+                    {
+                        pages = recordcount / pagenumber + 1; //余出来的数据放到多出来的一页里 
+                    }
+                    //Console.WriteLine(pages);
+
+
+                    ViewBag.PageCount = pagecount;//默认显示页码的数量
+
+                    ViewBag.PageNumbers = pagecount;// 实际显示页码数，eg. 余3页的情况
+
+                    //确认选中页码
+                    pageindex = int.Parse(ViewBag.Page.Replace("P", "")) - 1;   //int.Parse convert a string representation value into it's integer equivalent
+                    Console.WriteLine(pageindex);
+
+                    //确认当前页码的组号
+                    ViewBag.PageGroup = pageindex / pagecount;
+
+         
+
+                    if ((ViewBag.PageGroup + 1) * pagecount > pages)
+                    {
+                        ViewBag.PageNumbers = pages % pagecount;
+                    }
                     ViewBag.Users = db.EDU365_EduSystemsUsers.Where(x => x.UserEmail.Contains(data.Email)).OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+               
                 }
                 else
                 {
-                    ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+                     ViewBag.Users = db.EDU365_EduSystemsUsers.OrderByDescending(x => x.CreateTime).Skip(pageindex * pagenumber).Take(pagenumber).ToList();
+            
+                    
                 }
 
+               
+
+             
 
 
 
@@ -130,6 +249,7 @@ namespace WCC_PM25.Controllers
             //翻到上/下一个页面
             else
             {
+
                 //先确认当前是哪个组
                 int pagegroup = int.Parse(ViewBag.Page.Substring(1));
 
@@ -160,7 +280,7 @@ namespace WCC_PM25.Controllers
                         pagegroup--;
                     }
 
-                    //如果总页数小于10
+          
                     if (pagecount > pages)
                     {
                         ViewBag.PageNumber = pages % pagecount;
@@ -170,8 +290,9 @@ namespace WCC_PM25.Controllers
 
                 }
 
-                //单放页：改变pagecount为1 
-                //if (ViewBag.Page.IndexOf("n") == 0) { 
+                                                                                                                                                         //单放页：改变pagecount为1 
+              
+                     
 
 
                 //        ViewBag.PageCount = 1;
@@ -195,8 +316,9 @@ namespace WCC_PM25.Controllers
                 //        int pagegroup = int.Parse(ViewBag.Page.Substring(1));
                 //        //检查range
                 //        if (pagegroup > 0)
-                //        {
-                //            pagegroup--;
+       
+
+                          //            pagegroup--;
                 //        }
 
                 //        if (10 > pages)
