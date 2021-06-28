@@ -1,77 +1,122 @@
 ﻿@model UserViewModel
 
-    <form method="post" asp-controller="management" asp-action="users">
-        <div style="        float: left;
+<form method="post" asp-controller="management" asp-action="users">
+    <div style="        float: left;
         background-color: #808080;
         width: 100%;
         height: 60px;
         padding: 10px;
 ">
-            <div style="        float: left;
+        <div style="        float: left;
         padding:10px;padding-top:5px
 ">
-                <i class="fa fa-bars fa-2x"></i>
-                <span style="font-size:25px;">PM2.5</span>
-            </div>
-            <div style="float:right;"><img src="~/images/logo.png" height="40" /></div>
+            <i class="fa fa-bars fa-2x"></i>
+            <span style="font-size:25px;">PM2.5</span>
         </div>
-        <div style="        float: left;
+        <div style="float:right;"><img src="~/images/logo.png" height="40" /></div>
+    </div>
+    <div style="        float: left;
         width: 20%;
         height: 700px;
         padding: 10px;
         border: solid 1px #cccccc;
     ">
-            <div style="width:100%;">系统</div>
-            <div style="width: 100%; padding-left: 30px;"><a asp-controller="Management" asp-action="Users" asp-route-data="cn"><i class="fa fa-user"></i> 用户</a></div>
+        <div style="width:100%;">系统</div>
+        <div style="width: 100%; padding-left: 30px;"><a asp-controller="Management" asp-action="Users" asp-route-data="cn"><i class="fa fa-user"></i> 用户</a></div>
 
-            <div style="width:100%;">管理</div>
-            <div style="width: 100%; padding-left: 30px;"><a asp-controller="Management" asp-action="Regions" asp-route-data="cn"><i class="fa fa-home"></i> 区域</a></div>
-            <div style="width: 100%; padding-left: 30px;"><i class="fa fa-check-square"></i> xxxxxx</div>
-            <div style="width: 100%; padding-left: 30px;">xxxxxx</div>
-            <div style="width: 100%; padding-left: 30px;">xxxxxx</div>
-        </div>
-        <div style="float: left;border: solid 1px #cccccc;border-left: none;height: 700px; width: 80%
+        <div style="width:100%;">管理</div>
+        <div style="width: 100%; padding-left: 30px;"><a asp-controller="Management" asp-action="Regions" asp-route-data="cn"><i class="fa fa-home"></i> 区域</a></div>
+        <div style="width: 100%; padding-left: 30px;"><i class="fa fa-check-square"></i> xxxxxx</div>
+        <div style="width: 100%; padding-left: 30px;">xxxxxx</div>
+        <div style="width: 100%; padding-left: 30px;">xxxxxx</div>
+    </div>
+    <div style="float: left;border: solid 1px #cccccc;border-left: none;height: 700px; width: 80%
     ">
-            <div style=" float: left;width: 100%;height: 50px;padding: 10px;border-bottom: solid 1px #cccccc;">
-                <div style="float:left;"><i class="fa fa-user"></i> 用户 </div>
-                <div style="float:right;">
-                    User Name: <input type="text" style="width:100px;" asp-for="@Model.UserName" />
-                    Email:  <input type="text" style="width:100px;" asp-for="@Model.Email" />
-                    Keyword:  <input type="text" style="width:100px;" asp-for="@Model.Keyword" />
-                    <input type="submit" value="Search" />
-                </div>
-
+        <div style=" float: left;width: 100%;height: 50px;padding: 10px;border-bottom: solid 1px #cccccc;">
+            <div style="float:left;"><i class="fa fa-user"></i> 用户  <a href="#modalDeleteConfirm" data-toggle="modal"  data-dismiss="modal" class="btn "><i class="fas fa-plus-square"></i></a> </div>
+            <div style="float:right;">
+                User Name: <input id="txtUsername" type="text" style="width:100px;" asp-for="@Model.UserName" />
+                Email:  <input type="text" style="width:100px;" asp-for="@Model.Email" />
+                Keyword:  <input type="text" style="width:100px;" asp-for="@Model.Keyword" />
+                <input id="btnSearch" type="submit" value="Search" />
+                <input type="button" value="Reset" onclick="Reset()" />
             </div>
-            <div style="float: left;width: 100%; height: 500px; text-align:center;padding:10px;">
-                <table style="width:100%;">
+
+        </div>
+        <div style="float: left;width: 100%; height: 500px; text-align:center;padding:10px;">
+            <table style="width:100%;">
+                <tr>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Create Time</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                @foreach (var user in ViewBag.Users)
+                {
                     <tr>
-                        <th>User Name</th>
-                        <th>Email</th>
-                        <th>Create Time</th>
-                        <th>Permission</th>
-                        <th>Delete</th>
+                        <td>@user.UserNameEn</td>
+                        <td>@user.UserEmail</td>
+                        <td>@user.CreateTime</td>
+                        <td><a href="#modalDeleteConfirm" data-toggle="modal" data-dismiss="modal" class="btn "><i class="fas fa-edit"></i></a></td>
+                        <td><input type="submit" asp-for="@Model.Operate" onclick="DeleteConfirm()" style="width:32px; background: url('https://cdn3.iconfinder.com/data/icons/watchify-v1-0-32px/32/delete-32.png') no-repeat; border: none; " asp-route-deleteuserguid="@user.SystemUserGuid" value=" "></td>
                     </tr>
-                    @foreach (var user in ViewBag.Users)
+                }
+            </table>
+            <table>
+                <tr>
+                    <td style="width:30px"><a href="/Management/Users?V@(ViewBag.PageGroup)"><div style="background-color:black;color:white">&lt;&lt;</div></a></td>
+                    @for (int i = 0; i < ViewBag.PageNumbers; i++)
                     {
-                        <tr>
-                            <td>@user.UserNameEn</td>
-                            <td>@user.UserEmail</td>
-                            <td>@user.CreateTime</td>
-                            <td><i class="fa fa-bars"></td>
-                            <td><i class="fa fa-desktop"></td>
-                        </tr>
+                        <!--<td style="width:30px"><a href="/Management/Users?P@(i+1+ViewBag.PageGroup*ViewBag.PageCount)"><div style="background-color:black;color:white">@(i+1 + ViewBag.PageGroup * ViewBag.PageCount)</div></a></td>-->
+                        <td style="width:30px"><input type="submit" asp-for="@Model.Page" value="@(i+1+ViewBag.PageGroup*ViewBag.PageCount)"></td>
                     }
-                </table>
-                <table>
-                    <tr>
-                        <td style="width:30px"><a href="/Management/Users?V@(ViewBag.PageGroup)"><div style="background-color:black;color:white">&lt;&lt;</div></a></td>
-                        @for (int i = 0; i < ViewBag.PageNumbers; i++)
-                        {
-                            <td style="width:30px"><a href="/Management/Users?P@(i+1+ViewBag.PageGroup*ViewBag.PageCount)"><div style="background-color:black;color:white">@(i+1 + ViewBag.PageGroup * ViewBag.PageCount)</div></a></td>
-                        }
-                        <td style="width:30px"><a href="/Management/Users?N@(ViewBag.PageGroup)"><div style="background-color:black;color:white">&gt;&gt;</div></a></td>
-                    </tr>
-                </table>
+                    <td style="width:30px"><a href="/Management/Users?N@(ViewBag.PageGroup)"><div style="background-color:black;color:white">&gt;&gt;</div></a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade displaynone" id="modalDeleteConfirm" aria-hidden="true">
+        <div class="modal-dialog modal-danger modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header Wellington-Blue">
+                    <h5 class="modal-title paddingtop3"><i class="fas fa-exclamation-circle"></i> @ViewBag.DeleteConfirm</h5>
+                    <button type="button" class="close Wellington-Black-link" data-dismiss="modal">
+                        <span>×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row p-1">
+                        <div class="col-12 paddingtop15 paddingbottom15">
+                            姓名 <input type="text" value="" />
+                        </div>
+                        <div class="col-12 paddingtop15 paddingbottom15">
+                            邮箱 <input type="text" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="new-modal-footer Wellington-White">
+                    <div class="row">
+                        <div class="col-6 paddingleft10">
+                            <button data-dismiss="modal" type="button" class="btn Wellington-Blue float-left">保存</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </form>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function Reset() {
+        document.getElementById("txtUsername").value = '';
+        document.getElementById("btnSearch").click();
+    }
+    function DeleteConfirm() {
+        var result = confirm("Want to delete?");
+        if (!result) {
+            event.preventDefault();
+        }
+    }
+</script>

@@ -13,5 +13,8 @@ namespace WCC_PM25.Models
 
         public string Keyword { get; set; }
 
+        public string Page { get; set; }
+
+        public string Operate { get; set; }
     }
 }
