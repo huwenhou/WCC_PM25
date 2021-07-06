@@ -16,5 +16,15 @@ namespace WCC_PM25.Models
         public string Page { get; set; }
 
         public string Operate { get; set; }
+        public string NextGroup { get; set; }
+
+        public NewUser NewUser { get; set; }
+    }
+
+    public class NewUser
+    {
+        public string UserName { get; set; }
+
+        public string Email { get; set; }
     }
 }

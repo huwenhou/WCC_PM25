@@ -1563,7 +1563,7 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Z.EntityFramework.Extensions.EFCore/5.1.38": {
+      "Z.EntityFramework.Extensions.EFCore/5.2.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
@@ -5934,16 +5934,16 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Z.EntityFramework.Extensions.EFCore/5.1.38": {
-      "sha512": "epnWwQggzFy+WF0Hch/rHsoXdlXEr0MPGnGPJtxuqbCQtjfeYDMoAs86B4tgl2CuT/ox1UFlPDVNnEJmNnWZwg==",
+    "Z.EntityFramework.Extensions.EFCore/5.2.0": {
+      "sha512": "z+nyLqMM/T3uFPTtykRo8ODtZJ+3EiIbsXmt6HJacnJM6kd7whpPJfqzhT+CVr9RTIfzir+Go2Yo1OxWDl5Ejw==",
       "type": "package",
-      "path": "z.entityframework.extensions.efcore/5.1.38",
+      "path": "z.entityframework.extensions.efcore/5.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.1/Z.EntityFramework.Extensions.EFCore.dll",
         "lib/netstandard2.1/Z.EntityFramework.Extensions.EFCore.xml",
-        "z.entityframework.extensions.efcore.5.1.38.nupkg.sha512",
+        "z.entityframework.extensions.efcore.5.2.0.nupkg.sha512",
         "z.entityframework.extensions.efcore.nuspec"
       ]
     }
@@ -5954,7 +5954,7 @@
       "Microsoft.EntityFrameworkCore >= 5.0.6",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.6",
       "Newtonsoft.Json >= 13.0.1",
-      "Z.EntityFramework.Extensions.EFCore >= 5.1.38"
+      "Z.EntityFramework.Extensions.EFCore >= 5.2.0"
     ]
   },
   "packageFolders": {
@@ -6014,7 +6014,7 @@
           },
           "Z.EntityFramework.Extensions.EFCore": {
             "target": "Package",
-            "version": "[5.1.38, )"
+            "version": "[5.2.0, )"
           }
         },
         "imports": [

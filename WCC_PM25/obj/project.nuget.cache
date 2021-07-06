@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GgRn5RrjIiK7Xrj19hMC7UOJKcv65ITCH2w1364tDKHwkJcsn5UYsu+yInBQKdn4iHm1W5k5o8u3LzFsAii4ZQ==",
+  "dgSpecHash": "TOPkWKBSojuxnyu3kYXGRwAgdEzU1k+0cZfGCTV5PN5K5F6t6I5Zd1PTtaKsXXLnDzMmb32fCg2sKC8+dj1gFg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Administrator\\Source\\Repos\\huwenhou\\WCC_PM25\\WCC_PM25\\WCC_PM25.csproj",
+  "projectFilePath": "C:\\Users\\Administrator\\source\\repos\\huwenhou\\WCC_PM25\\WCC_PM25\\WCC_PM25.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\5.0.5\\microsoft.aspnetcore.mvc.razor.extensions.5.0.5.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.runtimecompilation\\5.0.5\\microsoft.aspnetcore.mvc.razor.runtimecompilation.5.0.5.nupkg.sha512",
@@ -105,7 +105,7 @@
     "C:\\Users\\Administrator\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\z.entityframework.extensions.efcore\\5.1.38\\z.entityframework.extensions.efcore.5.1.38.nupkg.sha512"
+    "C:\\Users\\Administrator\\.nuget\\packages\\z.entityframework.extensions.efcore\\5.2.0\\z.entityframework.extensions.efcore.5.2.0.nupkg.sha512"
   ],
   "logs": []
 }

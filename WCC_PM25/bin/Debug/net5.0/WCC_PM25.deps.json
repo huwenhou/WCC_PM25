@@ -37,7 +37,7 @@
           "Microsoft.EntityFrameworkCore": "5.0.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.6",
           "Newtonsoft.Json": "13.0.1",
-          "Z.EntityFramework.Extensions.EFCore": "5.1.38",
+          "Z.EntityFramework.Extensions.EFCore": "5.2.0",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "5.0.0.0",
@@ -1380,7 +1380,7 @@
           "System.Xml.XmlDocument": "4.3.0"
         }
       },
-      "Z.EntityFramework.Extensions.EFCore/5.1.38": {
+      "Z.EntityFramework.Extensions.EFCore/5.2.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.6",
@@ -1391,8 +1391,8 @@
         },
         "runtime": {
           "lib/netstandard2.1/Z.EntityFramework.Extensions.EFCore.dll": {
-            "assemblyVersion": "5.1.38.0",
-            "fileVersion": "5.1.38.0"
+            "assemblyVersion": "5.2.0.0",
+            "fileVersion": "5.2.0.0"
           }
         },
         "compile": {
@@ -3800,12 +3800,12 @@
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
-    "Z.EntityFramework.Extensions.EFCore/5.1.38": {
+    "Z.EntityFramework.Extensions.EFCore/5.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-epnWwQggzFy+WF0Hch/rHsoXdlXEr0MPGnGPJtxuqbCQtjfeYDMoAs86B4tgl2CuT/ox1UFlPDVNnEJmNnWZwg==",
-      "path": "z.entityframework.extensions.efcore/5.1.38",
-      "hashPath": "z.entityframework.extensions.efcore.5.1.38.nupkg.sha512"
+      "sha512": "sha512-z+nyLqMM/T3uFPTtykRo8ODtZJ+3EiIbsXmt6HJacnJM6kd7whpPJfqzhT+CVr9RTIfzir+Go2Yo1OxWDl5Ejw==",
+      "path": "z.entityframework.extensions.efcore/5.2.0",
+      "hashPath": "z.entityframework.extensions.efcore.5.2.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/5.0.0.0": {
       "type": "referenceassembly",

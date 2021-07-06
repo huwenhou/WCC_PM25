@@ -69,9 +69,16 @@
                     @for (int i = 0; i < ViewBag.PageNumbers; i++)
                     {
                         <!--<td style="width:30px"><a href="/Management/Users?P@(i+1+ViewBag.PageGroup*ViewBag.PageCount)"><div style="background-color:black;color:white">@(i+1 + ViewBag.PageGroup * ViewBag.PageCount)</div></a></td>-->
-                        <td style="width:30px"><input type="submit" asp-for="@Model.Page" value="@(i+1+ViewBag.PageGroup*ViewBag.PageCount)"></td>
+                        <td style="width:30px"><input type="submit" asp-for="@Model.Page" asp-route-currentgroup="@(ViewBag.PageGroup)" value="@(i+1+ViewBag.PageGroup*ViewBag.PageCount)"></td>
                     }
-                    <td style="width:30px"><a href="/Management/Users?N@(ViewBag.PageGroup)"><div style="background-color:black;color:white">&gt;&gt;</div></a></td>
+                <td style="width:30px">
+
+                    @if (ViewBag.ShowNext)
+                    {
+                        <input type="submit" asp-for="@Model.Page" asp-route-nextgroup="@(ViewBag.PageGroup)" value=">>">
+                    }
+
+                </td>
                 </tr>
             </table>
         </div>
@@ -89,17 +96,18 @@
                 <div class="modal-body">
                     <div class="row p-1">
                         <div class="col-12 paddingtop15 paddingbottom15">
-                            姓名 <input type="text" value="" />
+                            姓名 <input type="text" asp-for="@Model.NewUser.UserName" value="" />
                         </div>
                         <div class="col-12 paddingtop15 paddingbottom15">
-                            邮箱 <input type="text" value="" />
+                            邮箱 <input type="text" asp-for="@Model.NewUser.Email" value="" />
                         </div>
                     </div>
                 </div>
                 <div class="new-modal-footer Wellington-White">
                     <div class="row">
                         <div class="col-6 paddingleft10">
-                            <button data-dismiss="modal" type="button" class="btn Wellington-Blue float-left">保存</button>
+                            <!--<button data-dismiss="modal" type="button" class="btn Wellington-Blue float-left">保存</button>-->
+                            <input    type="submit"  value="保存">
                         </div>
                     </div>
                 </div>
